@@ -15,21 +15,21 @@ pipeline {
         stage("Build Image of the Application") {
             steps {
                 sh """
-                    sudo docker build -t iamkhaihoang/hello-app:1.0 .
+                    docker build -t iamkhaihoang/hello-app:1.0 .
                 """
             }
         }		
         stage("DockerHub Login") {
             steps {
                 sh """
-                    sudo echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
                 """
             }
         }		
 		stage("Push") {
             steps {
                 sh """
-		    sudo docker push iamkhaihoang/hello-app:1.0
+		    docker push iamkhaihoang/hello-app:1.0
                 """
             }
         }
@@ -37,7 +37,7 @@ pipeline {
     post {
 	always {
 		sh """
-		    sudo docker logout
+		    docker logout
 		"""
 	}
     }
