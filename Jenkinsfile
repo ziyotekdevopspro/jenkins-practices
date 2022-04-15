@@ -3,7 +3,7 @@ pipeline {
 	environment {
 	 DOCKERHUB_CREDENTIALS = credentials('iamkhaihoang-dockerhub')
 	 GITHUB_REPO_NAME = "iamkhaihoang/hello-app"
-	 IMAGE_TAG = "1.0" 
+	 IMAGE_TAG = 1.0 
 	 IMAGE_NAME = "${GITHUB_REPO_NAME}:${IMAGE_TAG}"
 	}
     stages {
@@ -24,9 +24,7 @@ pipeline {
         }		
         stage("DockerHub Login") {
             steps {
-                sh """
-                    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                """
+                sh ('echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin')
             }
         }		
 		stage("Push") {
