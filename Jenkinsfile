@@ -2,6 +2,9 @@ pipeline {
     agent any
 	environment {
 	 DOCKERHUB_CREDENTIALS = credentials('iamkhaihoang-dockerhub')
+	 GITHUB_REPO_NAME = iamkhaihoang/hello-app
+	 IMAGE_TAG = 1.0 
+	 IMAGE_NAME = $GITHUB_REPO_NAME:$IMAGE_TAG
 	}
     stages {
         stage("Build Application") {
@@ -15,7 +18,7 @@ pipeline {
         stage("Build Image of the Application") {
             steps {
                 sh """
-                    docker build -t iamkhaihoang/hello-app:1.0 .
+                    docker build -t $IMAGE_NAME .
                 """
             }
         }		
@@ -29,16 +32,14 @@ pipeline {
 		stage("Push") {
             steps {
                 sh """
-		    docker push iamkhaihoang/hello-app:1.0
+					docker push $IMAGE_NAME
                 """
             }
         }
     }
-    post {
-	always {
-		sh """
-		    docker logout
-		"""
+	post {
+			always {
+				sh 'docker logout'
+			}
 	}
-    }
 }
