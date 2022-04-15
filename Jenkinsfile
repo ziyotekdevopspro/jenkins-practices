@@ -2,8 +2,8 @@ pipeline {
     agent any
 	environment {
 	 DOCKERHUB_CREDENTIALS = credentials('iamkhaihoang-dockerhub')
-	 GITHUB_REPO_NAME = iamkhaihoang/hello-app
-	 IMAGE_TAG = 1.0 
+	 GITHUB_REPO_NAME = "iamkhaihoang/hello-app"
+	 IMAGE_TAG = "1.0" 
 	 IMAGE_NAME = "${GITHUB_REPO_NAME}:${IMAGE_TAG}"
 	}
     stages {
