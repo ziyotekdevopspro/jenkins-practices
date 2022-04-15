@@ -13,9 +13,9 @@ pipeline {
 		stage("Deploy") {
             steps {
                 sh """
-                    docker build -t hello-app:1.0 .
-					docker tag hello-app:1.0 iamkhaihoang/hello-app:1.0
-					docker push iamkhaihoang/hello-app:1.0
+                    sudo docker build -t hello-app:1.0 .
+		    sudo docker tag hello-app:1.0 iamkhaihoang/hello-app:1.0
+		    sudo docker push iamkhaihoang/hello-app:1.0
                 """
             }
         }
