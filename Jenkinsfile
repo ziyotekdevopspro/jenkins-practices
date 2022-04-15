@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh """
                     javac HelloWorld.java
-                    java HelloWorld
+                    #java HelloWorld
                 """
             }
         }
