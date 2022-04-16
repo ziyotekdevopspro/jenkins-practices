@@ -37,7 +37,7 @@ pipeline {
         }
 	stage("Deploy") {
             steps {
-		sh('ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE && docker run $IMAGE_NAME')
+		sh('ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker run $IMAGE_NAME')
             }
         }
     }
