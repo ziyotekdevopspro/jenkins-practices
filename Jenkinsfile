@@ -25,7 +25,7 @@ pipeline {
         }		
         stage("DockerHub Login") {
             steps {
-                sh('echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin')
+                sh('echo -o StrictHostKeyChecking=no $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin')
             }
         }		
 	stage("Push") {
