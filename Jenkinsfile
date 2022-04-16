@@ -25,7 +25,7 @@ pipeline {
         }		
         stage("DockerHub Login") {
             steps {
-                sh('echo -o StrictHostKeyChecking=no $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin')
+                sh('echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin')
             }
         }		
 	stage("Push") {
@@ -37,7 +37,7 @@ pipeline {
         }
 	stage("Deploy") {
             steps {
-		sh('ssh $JENKINS_DEPLOYED_MACHINE && docker run $IMAGE_NAME')
+		sh('ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE && docker run $IMAGE_NAME')
             }
         }
     }
