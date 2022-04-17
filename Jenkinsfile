@@ -39,6 +39,7 @@ pipeline {
             steps {
 		sh """
 			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker system prune -f
+			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker rmi $IMAGE_NAME
 			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker run $IMAGE_NAME
 		"""
             }
