@@ -37,9 +37,11 @@ pipeline {
         }
 	stage("Deploy") {
             steps {
-		sh('ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker ps -a | grep $IMAGE_NAME | xargs docker rm') 
-		sh('ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker rmi $IMAGE_NAME') 
-		sh('ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker run $IMAGE_NAME')
+		sh """
+			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker ps -a | grep $IMAGE_NAME | xargs docker rm
+			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker rmi $IMAGE_NAME
+			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker run $IMAGE_NAME
+		"""
             }
         }
     }
