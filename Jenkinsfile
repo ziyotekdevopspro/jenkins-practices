@@ -38,9 +38,7 @@ pipeline {
 	stage("Deploy") {
             steps {
 		sh """
-			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker docker stop $(docker ps -a -q)
-			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker rm $(docker ps -a -q)
-			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker rmi $IMAGE_NAME
+			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $IMAGE_NAME		
 			ssh -o StrictHostKeyChecking=no $JENKINS_DEPLOYED_MACHINE docker run $IMAGE_NAME
 		"""
             }
